@@ -76,3 +76,11 @@ if [ "$SUPERSET_LOAD_EXAMPLES" = "yes" ]; then
     fi
     echo_step "4" "Complete" "Loading examples"
 fi
+
+apt-get update -y
+apt-get install wget -y
+apt-get install unzip -y
+apt-get install -y libaio1 alien
+wget http://yum.oracle.com/repo/OracleLinux/OL7/oracle/instantclient/x86_64/getPackage/oracle-instantclient19.6-basic-19.6.0.0.0-1.x86_64.rpm
+alien -i --scripts oracle-instantclient*.rpm
+rm -f oracle-instantclient*.rpm
