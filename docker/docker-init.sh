@@ -84,3 +84,19 @@ apt-get install -y libaio1 alien
 wget http://yum.oracle.com/repo/OracleLinux/OL7/oracle/instantclient/x86_64/getPackage/oracle-instantclient19.6-basic-19.6.0.0.0-1.x86_64.rpm
 alien -i --scripts oracle-instantclient*.rpm
 rm -f oracle-instantclient*.rpm
+
+# configurar o duckdb
+
+./duckdb &
+
+# Aguardar um momento para que o DuckDB seja iniciado completamente
+sleep 4
+
+# Executar as configurações dentro do terminal do banco
+echo "INSTALL httpfs;" | ./duckdb
+echo "LOAD httpfs;" | ./duckdb
+echo "SET s3_region='us-east-1';" | ./duckdb
+echo "SET s3_url_style='path';" | ./duckdb
+echo "SET s3_endpoint='172.28.234.122:9000';" | ./duckdb
+echo "SET s3_access_key_id='admin';" | ./duckdb
+echo "SET s3_secret_access_key='password';" | ./duckdb
